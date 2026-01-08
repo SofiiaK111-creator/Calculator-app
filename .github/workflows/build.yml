@@ -6,7 +6,7 @@ on:
   push:
 
 concurrency:
-  group: build-group
+  group: build-group-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
