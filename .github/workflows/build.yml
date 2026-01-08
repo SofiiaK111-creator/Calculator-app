@@ -4,6 +4,13 @@ run-name: 'Build: ${{ github.ref_name }}_${{ github.run_id }}'
 on: 
   workflow_dispatch:
   push:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: build-group
+  cancel-in-progress: false
 
 jobs:
   build:
