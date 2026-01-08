@@ -1,4 +1,4 @@
-name: Build Calculator App
+name: Build Application
 on: 
   workflow_dispatch: 
   pull_request:
