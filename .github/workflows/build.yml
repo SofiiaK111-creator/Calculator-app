@@ -1,0 +1,28 @@
+name: Build Application
+run-name: 'Build: ${{ github.ref_name }}_${{ github.run_id }}'
+
+on: 
+  workflow_dispatch:
+  push:
+
+concurrency:
+  group: build-group-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
